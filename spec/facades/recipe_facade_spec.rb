@@ -7,5 +7,17 @@ RSpec.describe RecipeFacade, :vcr do
 
       expect(return_value).to be_a(Array)
     end
+
+    it 'invalid search arg' do
+      return_value = RecipeFacade.create_recipe_poros("asdfsdfsdfsdfsd")
+
+      expect(return_value).to eq([])
+    end
+
+    it 'empty string arg' do
+      return_value = RecipeFacade.create_recipe_poros("asdfsdfsdfsdfsd")
+      
+      expect(return_value).to eq([])
+    end
   end
 end

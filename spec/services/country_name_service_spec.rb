@@ -1,11 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe CountryNameService, :vcr do
-  context 'country_data' do
-   it 'retrieves all country data' do
-      return_value = CountryNameService.country_data
+  it 'retrieves data for all country names' do
+    return_value = CountryNameService.country_names_data
 
-      expect(return_value).to be_an(Array)
-    end
+    expect(return_value).to be_an(Array)
+    expect(return_value.first[:name]).to be_a(String)
+    expect(return_value.second[:name]).to be_a(String)
   end
 end
