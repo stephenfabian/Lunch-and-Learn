@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe CountryNameService do
+RSpec.describe CountryNameService, :vcr do
   context 'country_data' do
    it 'retrieves all country data' do
       return_value = CountryNameService.country_data
