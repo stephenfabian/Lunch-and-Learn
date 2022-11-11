@@ -5,6 +5,7 @@ RSpec.describe Recipe do
     attributes_hash =  {
                         :label=>"Usa-Style Pancake Recipe",
                         :url=>"http://www.jamieoliver.com/recipes/other-recipes/pancakes-usa-stylie",
+                        :country=>"thailand",
                         :image=> "sdfsdlfskdjflds"
                       }
     recipe1 = Recipe.new(attributes_hash)

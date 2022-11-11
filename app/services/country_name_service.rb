@@ -1,6 +1,6 @@
 class CountryNameService
-  def self.country_data
-    response = Faraday.get('https://restcountries.com/v3.1/all')
+  def self.country_names_data
+    response = Faraday.get('https://restcountries.com/v2/all?fields=name')
     parse(response)
   end
 
