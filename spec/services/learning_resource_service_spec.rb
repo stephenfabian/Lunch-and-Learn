@@ -11,14 +11,13 @@ RSpec.describe LearningResourceService, :vcr do
       expect(return_value[:items].first).to be_a(Hash)
       expect(return_value[:items].first).to be_a(Hash)
       expect(return_value[:items].first[:snippet][:title]).to be_a(String)
-      expect(return_value[:items].first[:snippet][:title]).to be_a(String)
       expect(return_value[:items].first[:id][:videoId]).to be_a(String)
     end
   end
 
   context '#photo_search_data' do
     it 'retrieves data for 10 photos related to a given country' do
-      return_value = LearningResourceService.photo_search_data("USA")
+      return_value = LearningResourceService.photo_search("USA")
   
       expect(return_value).to be_a(Hash)
       expect(return_value[:results]).to be_a(Array)

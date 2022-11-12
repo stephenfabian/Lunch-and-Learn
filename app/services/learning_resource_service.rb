@@ -17,7 +17,7 @@ class LearningResourceService
     JSON.parse(api_data.body, symbolize_names: true)
   end
 
-  def self.photo_search_data(country)
+  def self.photo_search(country)
     response = image_conn.get("?query=#{country}&per_page=10")
     parse(response)
   end
