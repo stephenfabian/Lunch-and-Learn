@@ -3,7 +3,7 @@ class CreateUsers < ActiveRecord::Migration[5.2]
     create_table :users do |t|
       t.string :name
       t.string :email
-      t.integer :api_key      
+      t.bigint :api_key      
       t.timestamps
     end
   end
