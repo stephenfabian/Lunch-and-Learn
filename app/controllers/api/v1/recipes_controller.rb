@@ -1,6 +1,7 @@
 class Api::V1::RecipesController < ApplicationController
 
   def index
+    require 'pry'; binding.pry
     if !params[:country]
       random_country_name = CountryNameFacade.random_country
       @recipes = RecipeFacade.create_recipe_poros(random_country_name)
