@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Recipes Request Feature', :vcr do
-  it 'Visiting recipe index shows the first 10 search results for the given country name' do
+  it 'Happy path - Visiting recipe index shows the first 10 search results for the given country name' do
     country_params = {country: "thailand"}
     get api_v1_recipes_path, headers: headers, params: country_params
     parsed_response = JSON.parse(response.body, symbolize_names: true)
@@ -28,7 +28,7 @@ RSpec.describe 'Recipes Request Feature', :vcr do
     expect(first_recipe[:attributes].count).to eq(4)
   end
 
-  it 'Empty string search returns empty data array' do
+  it 'Sad path - Empty string search returns empty data array' do
     country_params = {country: ""}
     get api_v1_recipes_path, headers: headers, params: country_params
     parsed_response = JSON.parse(response.body, symbolize_names: true)
@@ -39,7 +39,7 @@ RSpec.describe 'Recipes Request Feature', :vcr do
     expect(parsed_response).to eq(expected_return_value)
   end
 
-  it 'Search value that doesnt return any recipes, returns empty data array' do
+  it 'Sad path - Search value that doesnt return any recipes, returns empty data array' do
     country_params = {country: "asdfsdfsdfsdfsd"}
     get api_v1_recipes_path, headers: headers, params: country_params
     parsed_response = JSON.parse(response.body, symbolize_names: true)
@@ -50,7 +50,7 @@ RSpec.describe 'Recipes Request Feature', :vcr do
     expect(parsed_response).to eq(expected_return_value)
   end
 
-  it 'If country is not sent in by the user, country name search arg randomly chosen' do
+  it 'Edge case - If country is not sent in by the user, country name search arg randomly chosen' do
     allow(CountryNameFacade).to receive(:random_country).and_return('Russia')
 
     get api_v1_recipes_path
