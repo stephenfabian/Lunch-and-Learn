@@ -10,12 +10,17 @@ RSpec.describe User, type: :model do
     it {should validate_uniqueness_of(:api_key)}
   end
 
+  describe 'relationships' do
+    it {should have_many(:favorites)}
+  end
+
   describe 'generate_random_key' do
     it 'generates random api key for user' do
       api_key = User.generate_random_key
       
       expect(api_key).to be_a(Integer)
-      expect(api_key.to_s.length).to eq(15)
+      expect(api_key.to_s.length).to be > 13
+      expect(api_key.to_s.length).to be < 16
     end
   end
 end
