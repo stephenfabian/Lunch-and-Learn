@@ -35,6 +35,7 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'figaro'
   gem 'pry'
+  gem 'simplecov'
 end
 
 group :development do
@@ -48,7 +49,6 @@ group :test do
   gem 'faker'
   gem 'rspec-rails'
   gem 'shoulda-matchers'
-  gem 'simplecov'
   gem 'vcr'
   gem 'webmock'
 end

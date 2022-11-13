@@ -10,6 +10,13 @@ class Api::V1::FavoritesController < ApplicationController
     end
   end
 
+  def index
+    @user = User.find_by(api_key: params[:api_key])
+    @favorites = @user.favorites
+    render json: FavoriteSerializer.new(@favorites)
+    require 'pry'; binding.pry
+  end
+
   def favorite_params
     params.require(:favorite).permit(:country, :recipe_link, :recipe_title)
   end
