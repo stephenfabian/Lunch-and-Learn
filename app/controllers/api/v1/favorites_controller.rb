@@ -12,9 +12,11 @@ class Api::V1::FavoritesController < ApplicationController
 
   def index
     @user = User.find_by(api_key: params[:api_key])
-    @favorites = @user.favorites
-    render json: FavoriteSerializer.new(@favorites)
-    require 'pry'; binding.pry
+    if !@user
+      render json: {"error": "cannot find user with given api key"}, status: 400
+    else
+    render json: FavoriteSerializer.new(@user.favorites)
+    end
   end
 
   def favorite_params
