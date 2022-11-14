@@ -30,5 +30,15 @@ RSpec.describe CountryNameFacade, :vcr do
       expect(return_value).to eq([174.0, -41.0])
     end
   end
+
+  context '#valid_country?' do
+    it 'returns boolean if country is valid or not' do
+      correct_return_value = CountryNameFacade.valid_country?("France")
+      incorrect_return_value = CountryNameFacade.valid_country?("sdlfkjwelofikwejof")
+
+      expect(correct_return_value).to eq(true)
+      expect(incorrect_return_value).to eq(false)
+    end
+  end
 end
 

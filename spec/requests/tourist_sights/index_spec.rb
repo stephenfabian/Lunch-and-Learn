@@ -35,6 +35,9 @@ RSpec.describe 'Tourist Sights Search', :vcr do
   end
 
   it 'Extension - generate results for random country if no params are sent' do
+    allow(CountryNameFacade).to receive(:random_country).and_return("Italy")
+
+    country_params = {country: "asdfasdfasdfasdfsdafasdf"}
     get api_v1_tourist_sights_path, headers: headers
     parsed_response = JSON.parse(response.body, symbolize_names: true)
 
@@ -44,6 +47,18 @@ RSpec.describe 'Tourist Sights Search', :vcr do
     end
   end
 
+  it 'Extension #2 - generate results for random country if country searched is not valid' do
+    allow(CountryNameFacade).to receive(:random_country).and_return("Italy")
+
+    get api_v1_tourist_sights_path, headers: headers
+    parsed_response = JSON.parse(response.body, symbolize_names: true)
+
+    expect(response).to be_successful
+    parsed_response[:data].each do |sight|
+      structural_tests(sight)
+    end
+  end
+  
   def structural_tests(sight)
      expect(sight).to have_key(:id)
     expect(sight[:type]).to eq("tourist_sight")  

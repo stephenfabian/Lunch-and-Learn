@@ -17,4 +17,11 @@ class CountryNameFacade < CountryNameService
     lat_long = country_hash[:latlng]
     long_lat = lat_long.reverse
   end
+
+  def self.valid_country?(country_name)
+     country = country_data.find do |country|
+      country[:name] == country_name
+    end
+    !country.nil?
+  end
 end
