@@ -1,7 +1,5 @@
 class Api::V1::FavoritesController < ApplicationController
-
   def create
-    # require 'pry'; binding.pry
     @user = User.find_by(api_key: params[:favorite][:api_key])
     if !@user
       render json: {"error": "cannot find user with given api key"}, status: 400
@@ -21,6 +19,8 @@ class Api::V1::FavoritesController < ApplicationController
   end
 
   def favorite_params
-    params.require(:favorite).permit(:country, :recipe_link, :recipe_title)
+    params
+    .require(:favorite)
+    .permit(:country, :recipe_link, :recipe_title)
   end
 end

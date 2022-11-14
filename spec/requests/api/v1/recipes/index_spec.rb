@@ -60,7 +60,7 @@ RSpec.describe 'Recipes Request Feature', :vcr do
       structural_tests(recipe)
     end
   end
-
+  
   def structural_tests(recipe)
       expect(recipe).to have_key(:id)
       expect(recipe).to have_key(:type)
