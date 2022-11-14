@@ -10,9 +10,6 @@ class CountryNameFacade < CountryNameService
     country = country_data.find do |country|
       country[:name] == country_name
     end
-    # require 'pry'; binding.pry
-    # lat_long = country[:latlng]
-    # long_lat = lat_long.reverse
     coordinates(country)
   end
 

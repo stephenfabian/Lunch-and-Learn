@@ -21,20 +21,13 @@ RSpec.describe CountryNameFacade, :vcr do
 
   context '#coordinates' do
     it 'selects long lat(in that order) from country hash' do
-      country_hash = {:name=>"New Zealand",
-      :topLevelDomain=>[".nz"],
-      :alpha2Code=>"NZ",
-      :alpha3Code=>"NZL",
-      :callingCodes=>["64"],
-      :capital=>"Wellington",
-      :altSpellings=>["NZ", "Aotearoa"],
-      :subregion=>"Australia and New Zealand",
-      :region=>"Oceania",
-      :population=>5084300,
-      :latlng=>[-41.0, 174.0]
-          }
+      country_hash = {
+                      :name=>"New Zealand",
+                      :latlng=>[-41.0, 174.0]
+                    }
 
       return_value = CountryNameFacade.coordinates(country_hash)
+      expect(return_value).to eq([174.0, -41.0])
     end
   end
 end
