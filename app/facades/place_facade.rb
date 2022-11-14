@@ -1,17 +1,9 @@
 class PlaceFacade < PlaceService
-  #name
-  #formatted address
-  #placeID
-
   def self.create_tourist_sights_obj(long, lat)
     sights_data = search_by_long_lat(long, lat)
     sights_data[:features].map do |sight|
       sights_attributes_hash = {}
-      if !sight[:properties][:name]
-        sights_attributes_hash[:name] = "Unnamed Sight"
-      else
-        sights_attributes_hash[:name] = sight[:properties][:name]
-      end
+      sights_attributes_hash[:name] = sight[:properties][:name] || "Unnamed Sight"
       sights_attributes_hash[:address] = formatted_address(sight)
       sights_attributes_hash[:place_id] = sight[:properties][:place_id]
       TouristSight.new(sights_attributes_hash)
