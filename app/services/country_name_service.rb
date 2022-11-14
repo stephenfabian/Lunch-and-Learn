@@ -4,6 +4,11 @@ class CountryNameService
     parse(response)
   end
 
+  def self.country_data
+    response = Faraday.get('https://restcountries.com/v2/all')
+    parse(response)
+  end
+
   def self.parse(api_data)
     JSON.parse(api_data.body, symbolize_names: true)
   end
