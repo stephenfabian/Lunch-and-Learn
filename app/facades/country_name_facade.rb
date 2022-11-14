@@ -1,5 +1,4 @@
 class CountryNameFacade < CountryNameService
-
   def self.random_country
     country_names_array = country_names_data.map do |country|
       country[:name]
@@ -11,7 +10,14 @@ class CountryNameFacade < CountryNameService
     country = country_data.find do |country|
       country[:name] == country_name
     end
-    lat_long = country[:latlng]
+    # require 'pry'; binding.pry
+    # lat_long = country[:latlng]
+    # long_lat = lat_long.reverse
+    coordinates(country)
+  end
+
+  def self.coordinates(country_hash)
+    lat_long = country_hash[:latlng]
     long_lat = lat_long.reverse
   end
 end
