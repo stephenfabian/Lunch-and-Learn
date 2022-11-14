@@ -10,6 +10,15 @@ class Api::V1::FavoritesController < ApplicationController
     end
   end
 
+  def index
+    @user = User.find_by(api_key: params[:api_key])
+    if !@user
+      render json: {"error": "cannot find user with given api key"}, status: 400
+    else
+    render json: FavoriteSerializer.new(@user.favorites)
+    end
+  end
+
   def favorite_params
     params.require(:favorite).permit(:country, :recipe_link, :recipe_title)
   end
