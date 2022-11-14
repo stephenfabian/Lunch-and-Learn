@@ -1,14 +1,23 @@
 require 'rails_helper'
 
 RSpec.describe 'User Create Request' do
-  it 'Happy path - user info sent in post request creates a user in db, and renders 201 and user attributes' do
+  let(:user) do
+          {
+            "name": "Stephen Fabian",
+            "email": "stephenfabian@gmail.com"
+          }
+  end
+
+ let(:headers) { { CONTENT_TYPE: 'application/json' } }
+
+it 'Happy path - user info sent in post request creates a user in db, and renders 201 and user attributes' do
     params = {
               "name": "Stephen Fabian",
               "email": "stephenfabian@gmail.com"
             }
-    
-    headers = { "ACCEPT" => "application/json" }
-    post api_v1_users_path, :params => params, :headers => headers
+  
+    # headers = { "CONTENT_TYPE" => "application/json" }
+    post api_v1_users_path, headers: headers, params: JSON.generate(user: user)
     parsed_response = JSON.parse(response.body, symbolize_names: true)
 
     expect(response).to be_successful
@@ -23,21 +32,9 @@ RSpec.describe 'User Create Request' do
   end
 
   it 'Sad path - user email is not unique, returns appropriate error message' do
-    params_for_first_request = {
-                "name": "Stephen Fabian",
-                "email": "stephenfabian@gmail.com"
-              }
-    
-    headers = { "ACCEPT" => "application/json" }
-    post api_v1_users_path, :params => params_for_first_request, :headers => headers
-
-    params_for_second_request = {
-                "name": "Tommy Fabian",
-                "email": "stephenfabian@gmail.com"
-              }
-    
-    headers = { "ACCEPT" => "application/json" }
-    post api_v1_users_path, :params => params_for_second_request, :headers => headers
+    user1 = User.create(name: "Tommy Fabian", email: "stephenfabian@gmail.com", api_key: User.generate_random_key)
+    # headers = { "CONTENT_TYPE" => "application/json" }
+    post api_v1_users_path, headers: headers, params: JSON.generate(user: user)
     parsed_response = JSON.parse(response.body, symbolize_names: true)    
 
     expect(response).to_not be_successful

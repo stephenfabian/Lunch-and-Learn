@@ -21,7 +21,7 @@ http_interactions:
       Server:
       - openresty
       Date:
-      - Sat, 12 Nov 2022 08:08:01 GMT
+      - Sun, 13 Nov 2022 21:53:47 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -33,13 +33,13 @@ http_interactions:
       Expires:
       - Thu, 01 Jan 1970 00:00:00 GMT
       X-Served-By:
-      - ip-10-0-1-125.ec2.internal/10.0.1.125
+      - ip-10-0-1-36.ec2.internal/10.0.1.36
       Strict-Transport-Security:
       - max-age=15552001
       X-Request-Id:
-      - 7c8fbbcbe705e584cfb6869fb83dec57
+      - b3ff09f1a0a522db571d155783f3a904
     body:
       encoding: UTF-8
       string: '{"from":1,"to":0,"count":0,"_links":{},"hits":[]}'
-  recorded_at: Sat, 12 Nov 2022 08:08:00 GMT
+  recorded_at: Sun, 13 Nov 2022 21:53:46 GMT
 recorded_with: VCR 6.1.0
