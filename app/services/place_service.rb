@@ -12,7 +12,6 @@ class PlaceService
   end
 
 
-
   def self.search_by_long_lat(long, lat)
     response = conn.get("?filter=circle:#{long},#{lat},20000&categories=tourism.sights&limit=5")
     parse(response)
