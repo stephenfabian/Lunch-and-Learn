@@ -1,5 +1,4 @@
 class LearningResourceFacade 
-
   def self.video_details(country)
     video_data = LearningResourceService.video_search(country)
     if video_data[:items] == []

@@ -1,7 +1,11 @@
 class Api::V1::LearningResourcesController < ApplicationController
-
   def index
-    @learning_resource = LearningResourceFacade.learning_resource_object(params[:country])
-    render json: LearningResourceSerializer.new(@learning_resource) 
+    country_name = params[:country] || CountryNameFacade.random_country
+    if params[:country] && !valid_country?(params[:country]) 
+      render json: {failure: "Country name invalid"}, status: 400 
+    else
+      @learning_resource = LearningResourceFacade.learning_resource_object(country_name)
+      render json: LearningResourceSerializer.new(@learning_resource) 
+    end
   end
 end

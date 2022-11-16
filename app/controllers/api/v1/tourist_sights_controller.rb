@@ -1,7 +1,8 @@
 class Api::V1::TouristSightsController < ApplicationController
   def index
-    if CountryNameFacade.valid_country?(params[:country])
-      country = params[:country]
+    country_input = params[:country] || CountryNameFacade.random_country
+    if valid_country?(country_input)
+      country = country_input
     else
       country = CountryNameFacade.random_country
     end

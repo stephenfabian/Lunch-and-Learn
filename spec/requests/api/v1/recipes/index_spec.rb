@@ -25,26 +25,22 @@ RSpec.describe 'Recipes Request Feature', :vcr do
     end
   end
 
-  it 'Sad path - Empty string search returns empty data array' do
+  it 'Extension - Sad path - Empty string search returns empty data array' do
     country_params = {country: ""}
     get api_v1_recipes_path, headers: headers, params: country_params
     parsed_response = JSON.parse(response.body, symbolize_names: true)
-    expected_return_value = {
-                              "data": []
-                            }
 
-    expect(parsed_response).to eq(expected_return_value)
+    expect(parsed_response).to eq({failure: "Country name invalid"})
+    expect(response.status).to eq(400)
   end
 
-  it 'Sad path - Search value that doesnt return any recipes, returns empty data array' do
+  it 'Extension - Sad path - Search value that doesnt return any recipes, returns empty data array' do
     country_params = {country: "asdfsdfsdfsdfsd"}
     get api_v1_recipes_path, headers: headers, params: country_params
     parsed_response = JSON.parse(response.body, symbolize_names: true)
-    expected_return_value = {
-                              "data": []
-                            }
                             
-    expect(parsed_response).to eq(expected_return_value)
+    expect(parsed_response).to eq({failure: "Country name invalid"})
+    expect(response.status).to eq(400)
   end
 
   it 'Edge case - If country is not sent in by the user, country name search arg randomly chosen' do

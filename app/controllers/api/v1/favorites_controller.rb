@@ -1,6 +1,6 @@
 class Api::V1::FavoritesController < ApplicationController
   def create
-    @user = User.find_by(api_key: params[:favorite][:api_key])
+    @user = User.find_by(api_key: params[:api_key])
     if !@user
       render json: {"error": "cannot find user with given api key"}, status: 400
     else
