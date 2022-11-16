@@ -43,7 +43,6 @@ RSpec.describe 'Learning Resource Search Feature', :vcr do
     expect(parsed_response[:data][:type]).to eq("learning_resource")
     attributes = parsed_response[:data][:attributes]
     expect(attributes.count).to eq(3)
-    require 'pry'; binding.pry
     expect(attributes[:country]).to eq(country_params[:country])
     expect(attributes[:video]).to have_key(:title)
     expect(attributes[:video]).to have_key(:youtube_video_id)
