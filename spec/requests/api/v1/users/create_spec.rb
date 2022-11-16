@@ -11,11 +11,6 @@ RSpec.describe 'User Create Request' do
  let(:headers) { { CONTENT_TYPE: 'application/json' } }
 
 it 'Happy path - user info sent in post request creates a user in db, and renders 201 and user attributes' do
-    # params = {
-    #           "name": "Stephen Fabian",
-    #           "email": "stephenfabian@gmail.com"
-    #         }
-  
     post api_v1_users_path, headers: headers, params: JSON.generate(user: user)
     parsed_response = JSON.parse(response.body, symbolize_names: true)
 
